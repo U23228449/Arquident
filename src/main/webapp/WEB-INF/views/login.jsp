@@ -3,6 +3,7 @@
 <section class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
     <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-3xl shadow-2xl overflow-hidden" data-aos="fade-up">
+            <!-- Header del formulario -->
             <div class="gradient-bg text-white text-center py-8">
                 <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-lock text-3xl"></i>
@@ -11,29 +12,27 @@
                 <p class="text-blue-100 mt-2">Accede a tu cuenta de ArquiDent</p>
             </div>
 
+            <!-- Formulario -->
             <div class="p-8">
-                
-                <div id="alertas-container">
-                    <c:if test="${not empty error}">
-                        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 animate-slide-up" role="alert">
-                            <div class="flex items-center">
-                                <i class="fas fa-exclamation-triangle mr-2"></i>
-                                <span>${error}</span>
-                            </div>
+                <c:if test="${not empty error}">
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 animate-slide-up" role="alert">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            <span>${error}</span>
                         </div>
-                    </c:if>
+                    </div>
+                </c:if>
 
-                    <c:if test="${not empty mensaje}">
-                        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-6 animate-slide-up" role="alert">
-                            <div class="flex items-center">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                <span>${mensaje}</span>
-                            </div>
+                <c:if test="${not empty mensaje}">
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-6 animate-slide-up" role="alert">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>${mensaje}</span>
                         </div>
-                    </c:if>
-                </div>
+                    </div>
+                </c:if>
 
-                <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login" class="space-y-6">
+                <form method="post" action="${pageContext.request.contextPath}/login" class="space-y-6">
                     <div class="space-y-2">
                         <label for="correo" class="block text-sm font-semibold text-gray-700">
                             <i class="fas fa-envelope mr-2 text-primary-500"></i>Correo Electrónico
@@ -58,6 +57,7 @@
                     </button>
                 </form>
 
+                <!-- Link para registro -->
                 <div class="mt-8 text-center">
                     <p class="text-gray-600">
                         ¿No tienes una cuenta? 
@@ -68,33 +68,34 @@
                     </p>
                 </div>
 
+                <!-- Usuarios de prueba -->
                 <div class="mt-8 p-6 bg-gray-50 rounded-2xl">
                     <h4 class="text-center font-bold text-gray-700 mb-4">
                         <i class="fas fa-users mr-2 text-primary-500"></i>Usuarios de Prueba
                     </h4>
                     <div class="space-y-3 text-sm">
-                        <div class="flex justify-between items-center p-3 bg-white rounded-xl cursor-pointer hover:bg-blue-50 transition-colors" onclick="llenarDatos('carlos@paciente.com', 'pass123')">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-xl">
                             <div>
                                 <span class="font-semibold text-blue-600">Paciente:</span>
                                 <p class="text-gray-600">carlos@paciente.com</p>
                             </div>
                             <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">pass123</span>
                         </div>
-                        <div class="flex justify-between items-center p-3 bg-white rounded-xl cursor-pointer hover:bg-green-50 transition-colors" onclick="llenarDatos('luis@arqui.com', 'odonto123')">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-xl">
                             <div>
                                 <span class="font-semibold text-green-600">Odontólogo:</span>
                                 <p class="text-gray-600">luis@arqui.com</p>
                             </div>
                             <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">odonto123</span>
                         </div>
-                        <div class="flex justify-between items-center p-3 bg-white rounded-xl cursor-pointer hover:bg-purple-50 transition-colors" onclick="llenarDatos('ana@arqui.com', 'secret123')">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-xl">
                             <div>
                                 <span class="font-semibold text-purple-600">Secretaria:</span>
                                 <p class="text-gray-600">ana@arqui.com</p>
                             </div>
                             <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-medium">secret123</span>
                         </div>
-                        <div class="flex justify-between items-center p-3 bg-white rounded-xl cursor-pointer hover:bg-red-50 transition-colors" onclick="llenarDatos('admin@arqui.com', 'admin123')">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-xl">
                             <div>
                                 <span class="font-semibold text-red-600">Admin:</span>
                                 <p class="text-gray-600">admin@arqui.com</p>
@@ -109,40 +110,3 @@
 </section>
 
 <%@ include file="layout/footer.jsp" %>
-
-<script>
-    // Script para manejar la lógica del admin en desarrollo
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        const correo = document.getElementById('correo').value.trim();
-        
-        if (correo === 'admin@arqui.com') {
-            e.preventDefault(); // Detener el envío del formulario
-            
-            const container = document.getElementById('alertas-container');
-            
-            // Crear mensaje de "En Construcción"
-            container.innerHTML = `
-                <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-xl mb-6 animate-slide-up shadow-sm" role="alert">
-                    <div class="flex items-center">
-                        <div class="bg-yellow-100 p-2 rounded-full mr-3">
-                            <i class="fas fa-tools text-yellow-600"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold">Funcionalidad en Proceso</p>
-                            <p class="text-sm">El panel de Administrador se encuentra actualmente en desarrollo y no está disponible para inicio de sesión.</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Hacer scroll hacia arriba para ver el mensaje si es necesario
-            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    });
-
-    // Helper para llenar datos de prueba rápidamente (opcional)
-    function llenarDatos(user, pass) {
-        document.getElementById('correo').value = user;
-        document.getElementById('contrasena').value = pass;
-    }
-</script>
