@@ -1,4 +1,4 @@
-name: ArquiDent CI
+name: ArquiDent CI/CD
 
 on:
   push:
@@ -7,19 +7,27 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Configurar Java
+      - name: Configurar Java 11
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
           cache: 'maven'
 
-      - name: Ejecutar tests
+      - name: Compilar y ejecutar pruebas (Unitarias e Integración)
         run: mvn clean verify
+
+      # ESTE ES EL PASO DE CD BÁSICO
+      - name: Guardar empaquetado (Artefacto WAR)
+        uses: actions/upload-artifact@v4
+        if: success() # Solo se guarda si las pruebas pasaron
+        with:
+          name: arquident-webapp
+          path: target/*.war
