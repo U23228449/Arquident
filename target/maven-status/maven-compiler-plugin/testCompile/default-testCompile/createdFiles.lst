@@ -1,0 +1,6 @@
+pe\edu\utp\controller\ValidacionUsuariosControllerTest.class
+pe\edu\utp\controller\ProcesarPagoControllerTest.class
+pe\edu\utp\controller\ReservarCitaControllerTest.class
+pe\edu\utp\controller\GenerarPDFControllerTest.class
+pe\edu\utp\controller\LoginControllerTest.class
+pe\edu\utp\controller\ServiciosControllerTest.class
